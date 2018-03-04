@@ -1,4 +1,4 @@
-package com.pikachu.standaloneoptions.skript;
+package com.pikachu.standaloneoptions;
 
 import org.bukkit.event.Event;
 

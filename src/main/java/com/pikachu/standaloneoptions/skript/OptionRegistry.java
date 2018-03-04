@@ -10,10 +10,9 @@ import ch.njol.skript.lang.SelfRegisteringSkriptEvent;
 import ch.njol.skript.lang.SkriptParser;
 import ch.njol.skript.lang.Trigger;
 import ch.njol.skript.log.SkriptLogger;
-import ch.njol.util.Callback;
 import ch.njol.util.StringUtils;
+import com.pikachu.standaloneoptions.StubBukkitEvent;
 import org.bukkit.event.Event;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -24,23 +23,9 @@ import java.util.regex.Matcher;
 
 public class OptionRegistry extends SelfRegisteringSkriptEvent {
 
-    private final static Field NODE_MAP;
     private final static Field NODE_LIST;
     private final static Field NODE_KEY;
     private static HashMap<String, String> currentOptions = new HashMap<>();
-
-    static {
-
-        Field _NODE_MAP = null;
-        try {
-            _NODE_MAP = SectionNode.class.getDeclaredField("nodeMap");
-            _NODE_MAP.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-        NODE_MAP = _NODE_MAP;
-
-    }
 
     static {
 
@@ -75,6 +60,10 @@ public class OptionRegistry extends SelfRegisteringSkriptEvent {
 
     }
 
+    /*
+    * Could be done without recursion, but that's some
+    * annoying testing for something that is just a proof of concept anyways
+    */
     public void replaceOptions(SectionNode sectionNode) {
         try {
             for (Node node : (ArrayList<Node>) NODE_LIST.get(sectionNode)) {
