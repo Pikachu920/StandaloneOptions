@@ -1,0 +1,5 @@
+name: Standalone Options
+description: A proof of concept for creating options without them being built into the parser
+main: com.pikachu.standaloneoptions.StandaloneOptions
+version: 1.0
+depend: [Skript]
